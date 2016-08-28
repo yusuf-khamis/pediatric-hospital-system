@@ -1,0 +1,148 @@
+<section ng-controller="NurseController">
+    <h2 class="title">Waiting List</h2>
+    <div id="nurse">
+        <div class="nurseList" ng-repeat="data in waitingList">
+            <p class="nameInNurseList" id="{{data.id}}">{{data.first_name + " " + data.second_name + " " + data.surname}}</p>
+            <button type="button" class="btn btn-primary" value="{{data.child_id}}" data-target="#vaccination" id="showModal">Administer Vaccine</button>
+            <button type="button" class="btn btn-default" data-toggle="modal" value="{{data.child_id}}" data-target="#clinic" id="showModal">Basic Clinic info</button>
+        </div>
+    </div>
+</section>
+<!-- the clinical info modal box -->
+<div class="modal fade" role="dialog" id="clinic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Necessary tests</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal clinicData">
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <input type="text" name="weight" id="clinicInfo" class="form-control" placeholder="weight..." />
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" name="height" id="clinicInfo" class="form-control" placeholder="height..." />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <input type="text" name="temp" id="clinicInfo" class="form-control" placeholder="temperature (degree celsius)..." />
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" name="bp" id="clinicInfo" class="form-control" placeholder="blood pressure (mm/Hd)..." />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <input type="submit" value="Submit" class="btn btn-success" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="reset" value="Clear" class="btn btn-danger" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="alert alert-danger col-lg-9" id="forClinic">Please fill in all fields!</div>
+                <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end clinical info modal box -->
+
+<!-- the vaccine administration modal box -->
+<div class="modal fade" role="dialog" id="vaccination" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Vaccine administration</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal vaccineData">
+                    <div id="medsList">
+                        <div class="meds" ng-repeat="meds in vaccineMeds">
+                            <label class="forCheck">
+                                <input type="checkbox" name="type" value="{{meds.name}}" id="check" />
+                                <i class="glyphicon glyphicon-check nurseChecked"></i>
+                                <i class="glyphicon glyphicon-unchecked nurseUnchecked"></i>
+                            </label>
+                            <p id="checkLabel">{{meds.name}}:</p>
+                            <p id="checkLabel">{{"For " + meds.purpose + " until " + meds.completion + " in " + meds.consumption}}</p>
+                        </div>
+                    </div>
+                    <input type="submit" value="Done" class="btn btn-success" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="alert alert-danger col-lg-9" id="inVaccination">Please fill in all fields!</div>
+                <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of vaccine administration modal box -->
+
+<!-- the vaccine registration modal box -->
+<div class="modal fade" role="dialog" id="vaccineRegistration" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">No Vaccine data found</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal vaccineRegistration">
+                    <h4>Seems a new patient, register for their vaccine below</h4>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <input type="text" name="name" id="vaccineInfo" class="form-control" placeholder="name" />
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" name="purpose" id="vaccineInfo" class="form-control" placeholder="purpose" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <select name="consumption" id="vaccineInfo" class="form-control">
+                                <option>-- Select consumption frequency --</option>
+                                <option value="daily">Daily</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="every 2 months">Per 2 months</option>
+                                <option value="every 3 months">Per 3 months</option>
+                                <option value="every 4 months">Per 4 months</option>
+                                <option value="every 5 months">Per 5 months</option>
+                                <option value="every6 months">Per 6 months</option>
+                                <option value="yearly">Yearly</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <select name="completion" id="vaccineInfo" class="form-control">
+                                <option>-- Select completion time --</option>
+                                <option value="1 day">Today only</option>
+                                <option value="1 week">After one week</option>
+                                <option value="2 week">After two weeks</option>
+                                <option value="3 week">After three weeks</option>
+                                <option value="1 month">After one month</option>
+                                <option value="2 month">After two months</option>
+                                <option value="3 month">After three months</option>
+                                <option value="4 month">After four months</option>
+                                <option value="5 month">After five months</option>
+                                <option value="6 month">After six months</option>
+                                <option value="1 year">After a year</option>
+                                <option value="2 year">After 2 years</option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="submit" value="Submit" class="btn btn-success" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="alert alert-danger col-lg-9" id="inVaccineRegistration">Please fill in all fields!</div>
+                <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end of vaccine registration modal box -->

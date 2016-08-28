@@ -1,0 +1,140 @@
+<section>
+    <h2 class="title">Administrator's Panel</h2>
+    <div id="side-nav">
+        <div class="list-group">
+            <button class="list-group-item" id="staff">Manage staff</button>
+            <button class="list-group-item" id="stats">View stats</button>
+        </div>
+    </div>
+    <div id="main-content">
+        <div id="staff-manage">
+            <div class="col-sm-5">
+                <select class="form-control" ng-model="category">
+                    <option value="doctor">Doctors</option>
+                    <option value="nurse">Nurses</option>
+                    <option value="lab">Lab attendants</option>
+                    <option value="chemist">Chemists</option>
+                </select>
+            </div>
+            <div class=" col-sm-offset-5 col-sm-1">
+                <span class="glyphicon glyphicon-arrow-left pull-right staff-nav" ng-click="change()"></span>
+            </div>
+            <div class="col-sm-1">
+                <span class="glyphicon glyphicon-arrow-right pull-left staff-nav" ng-click="change()"></span>
+            </div>
+            <div class="col-md-12">
+                <div class="panel panel-default" ng-repeat="data in staff | filter: category | limitTo: limitValue">
+                    <div class="panel-heading">
+                        <div class="panel-title">{{data.firstname}} {{data.secondname}} {{data.surname}}</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-6">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <td colspan="2">Basic info</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>First name</td>
+                                        <td>{{data.firstname}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Second name</td>
+                                        <td>{{data.secondname}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Surname</td>
+                                        <td>{{data.surname}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Username</td>
+                                        <td>{{data.username}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phone number</td>
+                                        <td>{{data.phone}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gender</td>
+                                        <td>{{data.gender}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Password</td>
+                                        <td>{{data.password}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <td>Attendance</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div id="attend">
+                                                <table class="table table-bordered table-hover">
+                                                    <tbody>
+                                                        <tr ng-repeat="daily in data.attendance">
+                                                            <td>{{daily.date}}</td>
+                                                            <td>{{daily.day}}</td>
+                                                            <td>{{daily.time}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="stats-view">
+            <div class="col-md-12">
+                <div class="btn-group btn-group" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default" id="visit-part">Patients visit count</button>
+                    <button type="button" class="btn btn-default" id="disease-part">Disease statistics</button>
+                </div>
+            </div>
+            <div class="col-md-12" id="disease-stats">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">Diseases statistics</div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="disease-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" id="visit-stats">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">Patient visit statistics</div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-5">
+                            <select id="period" class="form-control">
+                                <option value="yearly">Yearly</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="daily">Daily</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <div id="visit_charts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

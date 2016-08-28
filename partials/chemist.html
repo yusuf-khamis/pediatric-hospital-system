@@ -1,0 +1,11 @@
+<section id="chemist" ng-controller="ChemistController">
+    <h2 class="title">Prescribed list</h2>
+    <div id="list">
+        <div ng-repeat="data in waitingList" class="alert alert-info alertInDoctor" role="alert">
+            <p class="nameInDoctor">{{data.first_name + " " + data.second_name + " " + data.surname}}</p>
+            <button class="btn btn-link prescription"><span class="glyphicon glyphicon-chevron-down"></span></button>
+            <button type="button" value="{{data.medication_id}}" id="{{data.child_id}}" class="btn btn-primary issue">Issued</button>
+            <p class="prescriptionText">{{data.prescription}}</p>
+        </div>
+    </div>
+</section>

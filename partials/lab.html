@@ -1,0 +1,40 @@
+<section ng-controller="LabController">
+    <h2 class="title">Pending Tests</h2>
+    <div id="tests">
+        <div class="alert alert-info pendingTest" ng-repeat="data in pending">
+            <p class="nameInLab">{{data.first_name + " " + data.second_name + " " + data.surname}}</p>
+            <button class="btn btn-default postResults" id="{{data.child_id}}" value="{{data.test_id}}">Post Results</button>
+            <p class="descriptionInLab">{{data.test_type}}</p>
+        </div>
+    </div>
+</section>
+
+<!--start of results modal-->
+<div id="lab" class="modal fade" aria-hidden="true" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title labTitle">Lab results for <span></span></h3>
+            </div>
+            <div class="modal-body">
+                <form id="inLab" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-offset-1 col-sm-10">
+                            <textarea class="form-control" name="results"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-1 col-sm-10">
+                            <input class="btn btn-primary" type="submit" value="Submit" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="alert alert-info col-sm-9" id="infoInLab">Fill in the lab results above</div>
+                <button class="btn btn-warning" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end of results modal-->

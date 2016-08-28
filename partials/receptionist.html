@@ -1,0 +1,120 @@
+<section ng-controller="ReceptionistController">
+    <h2 class="title">Patients list since last login</h2>
+    <div class="recentPatients">
+        <div class="recTHSection">
+            <table class="table table-hover table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th id="childName">Child's name</th>
+                        <th id="gender">Gender</th>
+                        <th id="dob">Born on</th>
+                        <th id="guardianName">Guardian's name</th>
+                        <th id="recieved">Received at</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="recTDSection">
+            <table class="table table-hover table-striped table-bordered">
+                <tbody>
+                    <tr ng-repeat="item in recentPatients">
+                        <td id="childName">{{item.first_name + " " + item.second_name + " " + item.surname}}</td>
+                        <td id="gender">{{item.gender}}</td>
+                        <td id="dob">{{item.dob}}</td>
+                        <td id="guardianName">{{item.guardian_first_name + " " + item.guardian_surname}}</td>
+                        <td id="recieved">{{item.visit_time}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#add" id="newPatient">New Patient</button>
+        <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#existing" id="newPatient">Existing Patient</button>
+    </div>
+
+    <!--start of modal for patient registration-->
+    <div class="modal fade" role="dialog" id="add" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">New patient</h3>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal personalData">
+                        <h4>Child's info</h4>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <input type="text" name="cfname" id="personalInfo" class="form-control" placeholder="child's first name..." />
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" name="csname" id="personalInfo" class="form-control" placeholder="child's second name..." />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <input type="text" name="csurname" id="personalInfo" class="form-control" placeholder="child's surname..." />
+                            </div>
+                            <div class="col-lg-3">
+                                <input type="text" name="dob" id="personalInfo" class="form-control" placeholder="yyyy-mm-dd" />
+                            </div>
+                            <div class="col-lg-3">
+                                <select name="gender" class="form-control" id="personalInfo">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <h4>Parent's/Guardian's info</h4>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <input type="text" name="fname" id="personalInfo" class="form-control" placeholder="guardian's first name..." />
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" name="surname" id="personalInfo" class="form-control" placeholder="guadian's surname..." />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                <input type="submit" value="Submit" class="btn btn-success" />
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="reset" value="Reset" class="btn btn-danger" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="alert alert-danger col-lg-9" id="personalAlert">Please fill in all fields!</div>
+                    <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end of modal for patient registration-->
+    
+    <!-- modal for existing patient -->
+    <div class="modal fade" role="dialog" id="existing" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Patient been here before</h4>
+                    <div id="search-container">
+                        <input type="text" id="search" ng-model="query" placeholder="search patients" />
+                        <span id="search-icon" class="glyphicon glyphicon-search"></span>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="existingPatientView">
+                        <button class="btn btn-default existingPatient" ng-repeat="item in allPatients | filter: query" value="{{item.child_id}}">
+                            {{item.first_name + " " + item.second_name + " "+ item.surname}}</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="alert alert-info col-lg-9" id="inExisting" id="personalAlert">Select from the existing above</div>
+                    <button type="button" class="btn btn-warning btn-lg" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
