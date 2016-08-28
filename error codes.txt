@@ -1,0 +1,11 @@
+~success						=	0
+mysql connect error				=	1
+mysql db select error			=	2
+mysql select error				=	3
+mysql insert error				=	4
+mysql update error				=	5
+mysql fetch error				=	6
+not logged in error				=	7
+
+no existing user error			=	8
+password error					=	9
